@@ -21,7 +21,6 @@ public class MainFrame extends JFrame {
 	private JButton registerButton, unregisterButton;
 	
 	private IController controller;
-	private String ip;
 
 	public MainFrame(IController controller) {
 		super("Client Demo");
@@ -58,7 +57,7 @@ public class MainFrame extends JFrame {
 																// JButton
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ip = serverIpTextField.getText();
+				String ip = serverIpTextField.getText();
 				String nombre1 = alumno1TextField.getText();
 				String nombre2 = alumno2TextField.getText();
 				String message = "";
@@ -81,7 +80,7 @@ public class MainFrame extends JFrame {
 		unregisterButton = new JButton("Terminar Laboratorio");
 		unregisterButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getController().unregister(ip);
+				getController().unregister();
 			}
 		});
 		unregisterButton.setEnabled(false);
