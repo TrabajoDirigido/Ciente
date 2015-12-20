@@ -29,7 +29,7 @@ public class RequestHandler {
 			result.put("id", request.getId());
 			result.put("origin", controller.getToken());
 					
-			System.out.println("id: "+request.getId()+", res: "+resSet.toString());
+			System.out.println("result: "+result);
 			
 			HttpRequest httpRequest = new QueryRequest(controller.getIp(), result);
 			String response = httpRequest.sendRequest();
