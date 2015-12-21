@@ -1,5 +1,7 @@
 package request;
 
+import interfaces.Request;
+
 import java.io.IOException;
 
 import org.apache.poi.xssf.usermodel.XSSFDrawing;
@@ -19,7 +21,8 @@ public class ChartDataRequest extends ExcelRequest{
 
 	public ChartDataRequest(ResSet input, String path) throws IOException {
 		super(input, path);
-		inputType = "null";
+		inputType = "tittle";
+		this.setSheet(1);
 	}
 
 	@Override
@@ -30,17 +33,17 @@ public class ChartDataRequest extends ExcelRequest{
 			return new StringResSet(ret);
 		}
 		
-		Chart chart = new Chart(drawing.getCharts().get(0).toString());
-		if(inputType.equals("title"))
-			new StringResSet(chart.getTitle());
+		Chart chart = new Chart(drawing.getCharts().get(0).getCTChart().toString());
+		if(inputType.equals("tittle"))
+			return new StringResSet(chart.getTitle());
 		else if(inputType.equals("xLabel"))
-			new StringResSet(chart.getXLabel());
+			return new StringResSet(chart.getXLabel());
 		else if(inputType.equals("yLabel"))
-			new StringResSet(chart.getYLabel());
+			return new StringResSet(chart.getYLabel());
 		else if(inputType.equals("type"))
-			new StringResSet(chart.getChartType());
+			return new StringResSet(chart.getChartType());
 		else if(inputType.equals("series"))
-			new StringResSet(chart.getSeriesNames());
+			return new StringResSet(chart.getSeriesNames());
 		
 		return new StringResSet(ret);
 	}
@@ -60,6 +63,11 @@ public class ChartDataRequest extends ExcelRequest{
 		this.inputType = rawData.optString("type","");		
 		
 		return null;
+	}
+	
+	public static void main(String[] args) throws IOException, ResSetException {
+		Request chart = new ChartDataRequest(null,"ejemplo.xlsx");
+		System.out.println(chart.execute());
 	}
 
 }

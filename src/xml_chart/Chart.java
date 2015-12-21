@@ -29,7 +29,8 @@ public class Chart {
 	}
 	
 	public String getTitle(){
-		return getTitle(doc.getRootElement());
+		String tittle = getTitle(doc.getRootElement());
+		return tittle;
 	}
 	
 	
